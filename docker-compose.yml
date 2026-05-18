@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  middleware:
+    build: .
+    container_name: chatwoot-botpress-middleware
+    ports:
+      - '3001:3001'
+    environment:
+      - CHATWOOT_API_URL=${CHATWOOT_API_URL}
+      - CHATWOOT_API_TOKEN=${CHATWOOT_API_TOKEN}
+      - CHATWOOT_WEBHOOK_SECRET=${CHATWOOT_WEBHOOK_SECRET}
+      - BOTPRESS_BOT_ID=${BOTPRESS_BOT_ID}
+      - BOTPRESS_API_TOKEN=${BOTPRESS_API_TOKEN}
+      - BOTPRESS_API_URL=${BOTPRESS_API_URL:-https://api.botpress.cloud/v1}
+      - PORT=3001
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
