@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Environment Variables
-const CHATWOOT_API_URL = process.env.CHATWOOT_API_URL;
+const CHATWOOT_API_URL = process.env.CHATWOOT_API_URL; // e.g., https://your-chatwoot.com/api/v1
 const CHATWOOT_API_TOKEN = process.env.CHATWOOT_API_TOKEN;
 const BOTPRESS_BOT_ID = process.env.BOTPRESS_BOT_ID;
 const BOTPRESS_API_TOKEN = process.env.BOTPRESS_API_TOKEN;
@@ -113,7 +113,7 @@ async function sendToChatwoot(conversationId, messageContent) {
       `${CHATWOOT_API_URL}/conversations/${conversationId}/messages`,
       {
         content: messageContent,
-        message_type: 'outgoing',
+        message_type: 'outgoing', // 0 = incoming, 1 = outgoing
         private: false,
       },
       {

@@ -14,9 +14,13 @@ services:
       - BOTPRESS_API_TOKEN=${BOTPRESS_API_TOKEN}
       - BOTPRESS_API_URL=${BOTPRESS_API_URL:-https://api.botpress.cloud/v1}
       - PORT=3001
+      - NODE_ENV=production
+    env_file:
+      - .env
     restart: always
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 40s
